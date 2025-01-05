@@ -1,0 +1,64 @@
+BullBot/
+├── config/
+│   └── config.yaml                      # Configuration file with paths, parameters, and model settings
+├── data/
+│   ├── raw/                             # Raw data files (e.g., .csv from sources like Yahoo Finance)
+│   ├── preprocessed/                    # Cleaned data files (e.g., .csv without NaNs)
+│   ├── behaviors/                       # Behavior-specific data
+│   │   ├── Short_Spike/                 # Short spike behavior data
+│   │   │   ├── Instances/               # .csv files for short spike instances
+│   │   │   └── Non_Instances/           # .csv files for short spike non-instances
+│   │   ├── Long_Spike/                  # Long spike behavior data
+│   │   │   ├── Instances/               # .csv files for long spike instances
+│   │   │   └── Non_Instances/           # .csv files for long spike non-instances
+│   │   ├── Short_Dip/                   # Short dip behavior data
+│   │   │   ├── Instances/               # .csv files for short dip instances
+│   │   │   └── Non_Instances/           # .csv files for short dip non-instances
+│   │   └── Long_Dip/                    # Long dip behavior data
+│   │       ├── Instances/               # .csv files for long dip instances
+│   │       └── Non_Instances/           # .csv files for long dip non-instances
+│   └── features/                        # Feature-engineered data (optional, if necessary)
+├── models/
+│   ├── Short_Spike/                     # Models for short spike behavior
+│   │   ├── trained/                     # Trained model files (.pkl)
+│   │   ├── validated/                   # Validation metrics/results (.json or .txt)
+│   │   └── tested/                      # Test metrics/results (.json or .txt)
+│   ├── Long_Spike/                      # Models for long spike behavior
+│   │   ├── trained/                     # Trained model files (.pkl)
+│   │   ├── validated/                   # Validation metrics/results (.json or .txt)
+│   │   └── tested/                      # Test metrics/results (.json or .txt)
+│   ├── Short_Dip/                       # Models for short dip behavior
+│   │   ├── trained/                     # Trained model files (.pkl)
+│   │   ├── validated/                   # Validation metrics/results (.json or .txt)
+│   │   └── tested/                      # Test metrics/results (.json or .txt)
+│   └── Long_Dip/                        # Models for long dip behavior
+│       ├── trained/                     # Trained model files (.pkl)
+│       ├── validated/                   # Validation metrics/results (.json or .txt)
+│       └── tested/                      # Test metrics/results (.json or .txt)
+├── notebooks/                           # Optional: Jupyter notebooks for exploration and debugging
+│   └── exploratory.ipynb                # Notebook for data exploration and visualization
+├── src/
+│   ├── preprocessing/
+│   │   ├── data_preprocess.py           # Script for cleaning raw data (e.g., remove NaNs)
+│   │   ├── short_spike_preprocessing.py # Script for generating short spike data
+│   │   ├── long_spike_preprocessing.py  # Script for generating long spike data
+│   │   ├── short_dip_preprocessing.py   # Script for generating short dip data
+│   │   └── long_dip_preprocessing.py    # Script for generating long dip data
+│   ├── training/
+│   │   ├── short_spike_training.py      # Training script for short spike
+│   │   ├── long_spike_training.py       # Training script for long spike
+│   │   ├── short_dip_training.py        # Training script for short dip
+│   │   └── long_dip_training.py         # Training script for long dip
+│   ├── validation/
+│   │   ├── short_spike_validation.py    # Validation script for short spike
+│   │   ├── long_spike_validation.py     # Validation script for long spike
+│   │   ├── short_dip_validation.py      # Validation script for short dip
+│   │   └── long_dip_validation.py       # Validation script for long dip
+│   ├── testing/
+│   │   ├── short_spike_test.py          # Testing script for short spike
+│   │   ├── long_spike_test.py           # Testing script for long spike
+│   │   ├── short_dip_test.py            # Testing script for short dip
+│   │   └── long_dip_test.py             # Testing script for long dip
+│   └── utils.py                         # Utility functions shared across scripts
+├── requirements.txt                     # Python dependencies
+└── README.md                            # Project overview and instructions

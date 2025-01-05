@@ -1,0 +1,93 @@
+okay correct me if im wrong here. but i think i need to do more with data cleaning. my idea would be to have 4 categories (better technical term?) of price history/trajectory. 
+1. short sudden gain
+2. long term gain
+3. short sudden loss
+4. long sudden loss
+
+I would collect as much stock price data as possible and clean that data. cleaning the data would look like something like this. i would compile this bulk unsorted, uncleaned data into one directory structure jsut for cleaning. 
+
+let me preface the next statement with this; i am looking for instances of one of those 4 categories, so it could be 1 company has one of each of these throughout its entire history of stock price, another company might have 2, another company might have 5 of one of these meaning it went up suddenly 5 times over the course of 1 year, or 10 years or w.e. so im looking for instances, not necessarily sorting tickers or companies. does this make sense? 
+
+that being said, now I would then somehow use python code to find instances of each of these categories and sort all of the data into 1 of these categories but id probably need to chop the length of time each training data. 
+
+MOST importantly, and i need you to comment on this idea: when the timeline of that stock price data is chopped, i believe it's important to chop off the price of the stock just prior to the spike or drop in price. because if the model is trained on data that shows the spike or drop it only make the alert to buy, sell or hold AFTER the category has already shown the spike or drop. does that make sense?
+
+now for the cleaning process. my theory is i can somehow use python to go through giant chunks of data of stock prices over time to identify spikes, drops or ramps or negative slopes, by using a relative price drop or spike, relative to the price each stock is normally at. meaning if the price of a stock is +-$0.1 and but the price of the stock is $100 each, then it wouldnt need an alert. but if the stock is +-$0.1 and but the price of the stock is $0.2 each, then it would need an alert. so it would somehow isolate those instances and chop the data for that ticker well in advance of that spike or drop and then days (or however long) before the spike or drop. that data would get saved, and then it would be labeled as either a spike, drop, negative slope or positive hill (better terminologies you can think of?). does that make sense? im not totally sure how this code woudl look but it probably can be done, and run on 10's of 1000's of tickers or 1000's of tickers over like a few decades of time to find enough data?
+
+
+
+
+data cleaning
+interesting. lets take a step back. there are four categories of behavior. if i download ex 10 years of data for 1000 companies. take company ex xyz, over 10 years of their data they might have 8 instances of each of these 4 categories of behavior. they might have 4 instances of sudden gain, 2 sudden loss, 1 long gain, 1 long loss. so if i have 1000 companies id like the code to be able to find all of these instances for each company over that time period, not just one instance and move onto the next company data. it would also be good to mention it might be important for the code to have a running price average as it is analyzing the price timeline for one company. what the code could is if it is at a date and it might have the past 3 months price average but that average is constantly fluctuating as the code runs along the timeline.
+
+for example if the code is analyzing company xyz, it is running along the timeline of that company's price. it might have an average of ~$1, then sudden gain to $10, the price average would change. it might not be a good idea to have it weighted but maybe it is, theres probably some statistics thing it might be able to take into effect the new average it might be seeing without the old $1 past 3 months taking too much of the average. 
+
+this might not be the most practical or professional approach or idea. im not sure if you even mentioned that or not. maybe im off and theres a much better way of handling this.
+
+
+
+next
+this looks amazing. a few things in particular with this python code:
+1. does this handle chopping the data off right before the spike? 
+2. if it chops off before the spike, it would need to be noticeably before the spike so the spikes leading tail isn't partially in it. 
+3. i think you mention it chops off the data 30 days before the spike?
+4. can i change that 30 days?
+5. does it save that new data to a new individual csv file? i think that would be best, please advise if theres a better solution. im running off my experience with image detection where each image is its own file. 
+6. if it does save it to a new csv file does it label it so when i feed the ML model, it will know what of the 4 behaviors it is studying or is there a better way to tell the model?
+7. does it save each cleaned behavior file to a sub folder for its respective behavior? if yes, the parent file to save them in each folder the file path is "J:\projects\BullBot\data\processed" each folder is "Short_Spike", "Short_Dip", "Long_Uptrend", "Long_Downtrend"
+8. the raw data will be in here, but once i download the data i might have to change the file path if theres more subfolders in the download. i can handle that manually when the time comes. "J:\projects\BullBot\data\raw"
+9. cant think of anything else. is that code ready to go as you described, ie. without my new asks? can you make the new code do these things? if yes, and if you do provide that code, please give me a short direct confirmation you were able to code these things.
+
+
+
+Next 
+okay the readme looks good. a few things:
+1. i noticed the original readme has a features subfolder. should the processed behavior data be sent to their respective subfolders there? do you need to see some code from a particular .py file to figure that out? let me know. When i asked you to build this project in another chat window you gave me a bulk cmd prompt prompt to run to build out the entire directory structure. that features folder wasn't in the build out, but it IS listed in the readme. so theres a conflict here it seems, because i didn't add that manually to the readme, chatgpt did, but it didn't make the actual features folder. 
+2. short and sweet answer for: what would be the difference between the raw, processed and features folders? 
+3. now that i have this how do i run this py file? is that instruction in the readme?
+4. what file type does the processing py expect the data to be in? ex csv?
+5. does it expect there to be headers? how will it know what it's looking for? do i need to download it first, then tell you what it looks like then you update the code to be able to read and process the raw data file?
+5. im going to download some data and see how if it works.
+
+
+next
+okay so now im confused it looks like when i worked with you before, in another chat, you made the data_preprocessing.py. is this py file supposed to do what we just talked about? it looks very minimal code. should i save over top of it? or should i rename the py file we just created something different and this would be a different type of preprocessing?
+
+
+next
+okay so data_preprocessing handles live data coming in from some kind of api after the model is trained and tested. data_behavior_preprocessing handles raw historic data to prepare it for training?
+
+
+next
+okay makes sense. thank you
+1. based on the readme once the data is cleaned and in each subfolder which command do i run to start the training process?
+2. that all being said when behavior py spits out the files for training what py file will look for the cleaned behavior files to train on? 
+3. do we need to make sure behavior py and THAT file have a warm handoff with naming convention and file paths? i can provide code for any py file you need to make this warm handoff happen and we can edit behavior py to make that happen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

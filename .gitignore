@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual Environment
+BullBot_env/
+env/
+
+# Data files
+data/
+
+# Results and logs
+results/
+logs/
+
+# Models
+models/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Config files
+config/config.yaml
+
+# Test artifacts
+*.test
