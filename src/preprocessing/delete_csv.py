@@ -1,7 +1,7 @@
 import os
 
 # Specify the folder path
-folder_path = "/mnt/e/projects/BullBot/data/polygon/processed/spikes"
+folder_path = "/mnt/e/projects/BullBot/data/polygon/clean"
 
 # Delete all .csv files in the folder
 for file_name in os.listdir(folder_path):

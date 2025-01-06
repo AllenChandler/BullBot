@@ -14,10 +14,9 @@ def clean_data(file_path):
         # Remove rows with NaN values
         df.dropna(inplace=True)
 
-        # Validate and convert `window_start`
+        # Validate `window_start` column (ensure it exists but do not convert)
         if 'window_start' in df.columns:
-            df['window_start'] = pd.to_datetime(df['window_start'], unit='ns', errors='coerce')
-            df.dropna(subset=['window_start'], inplace=True)
+            df = df[df['window_start'].notnull()]
 
         # Validate `close` column
         if 'close' in df.columns:
