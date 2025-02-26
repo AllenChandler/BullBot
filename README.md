@@ -6,6 +6,31 @@ The **BullBot Data Processing Pipeline** is designed to streamline the preproces
 
 The goal is to create high-quality datasets for training, validation, and testing stock market prediction models.
 
+### Table of Contents
+
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Directory Structure](#directory-structure)  
+4. [Installation](#installation)  
+   - [Prerequisites](#prerequisites)  
+   - [Setup](#setup)  
+5. [Usage](#usage)  
+   - [Fetch Data](#fetch-data)  
+   - [Clean Data](#clean-data)  
+   - [Calculate Metrics](#calculate-metrics)  
+   - [Detect Spikes](#detect-spikes)  
+   - [Detect Non-Spikes](#detect-non-spikes)  
+   - [Combine Tickers](#combine-tickers)  
+6. [Example Workflow](#example-workflow)  
+7. [Configuration](#configuration)  
+8. [Next Steps](#next-steps)  
+   - [Model Training](#1-model-training)  
+   - [Validation & Testing](#2-validation--testing)  
+   - [Real-Time Prediction](#3-real-time-prediction)  
+9. [Issues & Resolutions](#issues--resolutions)  
+10. [License](#license)  
+11. [Contribution](#contribution)  
+
 ---
 
 ## Features
@@ -33,32 +58,80 @@ The goal is to create high-quality datasets for training, validation, and testin
 
 ## Directory Structure
 
-```plaintext
 E:/projects/BullBot/
 │
+├── config/
+│   └── config.yaml
+│
 ├── data/
-│   ├── polygon/
-│   │   ├── raw/              # Raw downloaded data (unzipped .csv files)
-│   │   ├── clean/            # Cleaned and validated data
-│   │   ├── metrics/          # Data with calculated metrics
-│   │   ├── processed/
-│   │   │   ├── spikes/       # Pre-spike datasets
-│   │   │   ├── non_spikes/   # Non-spike datasets
-│   │   ├── continuous/       # Continuous datasets per ticker symbol
+│   ├── raw/
+│   │   ├── kaggle/
+│   │   ├── polygon/
+│   │   └── store/
+│   └── polygon/
+│       ├── clean/
+│       │   └── store/
+│       ├── continuous/
+│       │   └── store/
+│       ├── metrics/
+│       │   └── store/
+│       ├── processed/
+│       │   ├── live_test/
+│       │   │   ├── non_spikes/
+│       │   │   └── spikes/
+│       │   ├── test/
+│       │   │   ├── non_spikes/
+│       │   │   └── spikes/
+│       │   ├── train/
+│       │   │   ├── non_spikes/
+│       │   │   └── spikes/
+│       │   └── val/
+│       │       ├── non_spikes/
+│       │       └── spikes/
+│       └── raw/
+│           └── store/
+│
+├── models/
+│   ├── live_test/
+│   ├── test/
+│   ├── train/
+│   └── val/
+│
+├── notebooks/
+│
+├── results/
+│   ├── test_results/
+│   └── validation_results/
 │
 ├── src/
-│   ├── fetch_data.py         # Fetch and decompress data
-│   ├── clean_polygon.py      # Clean and validate data
-│   ├── metrics_polygon.py    # Calculate advanced metrics
-│   ├── spikes_polygon.py     # Detect spikes and prepare pre-spike datasets
-│   ├── non_spikes_polygon.py # Detect non-spike patterns
-│   ├── combine_tickers.py    # Create continuous datasets for each ticker
+│   ├── preprocessing/
+│   │   ├── clean_polygon.py
+│   │   ├── continuous_polygon.py
+│   │   ├── delete_csv_polygon.py
+│   │   ├── fetch_polygon.py
+│   │   ├── metrics_polygon.py
+│   │   └── spikes_polygon.py
+│   ├── testing/
+│   │   ├── short_spike_live_test.py
+│   │   └── spike_test_polygon.py
+│   ├── training/
+│   │   └── spike_train_polygon.py
+│   ├── validation/
+│   │   └── spike_val_polygon.py
+│   ├── api_test.py
+│   ├── delete_behavior_csvs.py
+│   ├── reset_model.py
+│   ├── utils.py
+│   └── __init__.py
 │
-├── tests/                    # Unit tests for the pipeline
+├── tests/
+│   ├── test_data_loader.py
+│   ├── test_data_preprocessing.py
+│   ├── test_feature_engineering.py
+│   └── __init__.py
 │
-├── README.md                 # Documentation
-└── requirements.txt          # Dependencies
-```
+└── README.md
+
 
 ---
 
@@ -209,3 +282,16 @@ python src/combine_tickers.py
 
 ## Contribution
 
+We welcome contributions to the BullBot Data Processing Pipeline! Whether it's reporting issues, suggesting features, or submitting pull requests, your input is valuable.
+
+How to Contribute
+Report Bugs: Use the GitHub Issues page to report bugs or feature requests.
+Fork and Submit PRs: Fork the repository, make your changes, and submit a pull request for review.
+Suggest Enhancements: Contact us directly with your ideas or feedback.
+Contact Information
+GitHub: @AllenChandler
+X: @WonMoreWave
+LinkedIn: https://www.linkedin.com/in/allenjchandler
+Email: allenjchandler@gmail.com
+       allen@shiftedorigin.com
+Feel free to reach out with any questions or suggestions. Thank you for helping make BullBot even better!

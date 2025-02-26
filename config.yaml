@@ -1,0 +1,90 @@
+# ===============================
+# CONFIG FILE FOR BULLBOT PIPELINES
+# ===============================
+
+# ---------------
+# GENERAL SETTINGS
+# ---------------
+use_deep_learning: true  # Set to false to use the traditional ML model
+use_cleaned_data: true  # True = use data from `metrics/`, False = use `raw/`
+use_continuous_data: true  # True = use `continuous/`, False = use `metrics/`
+
+# ---------------
+# DATA PATHS
+# ---------------
+data_paths:
+  # Raw data collected from Polygon API
+  raw_data: "E:/projects/BullBot_backup/data/polygon/raw"
+
+  # Cleaned data (after `clean_polygon.py`)
+  cleaned_data: "E:/projects/BullBot_backup/data/polygon/clean"
+
+  # Data with extra metrics (after `metrics_polygon.py`)
+  metrics_data: "E:/projects/BullBot_backup/data/polygon/metrics"
+
+  # Continuous data (after `continuous_polygon.py`) → Used for deep learning & spike detection
+  continuous_data: "E:/projects/BullBot_backup/data/polygon/continuous"
+
+  # Processed spikes data (after `spikes_polygon.py`) → Used for ML training
+  processed_spikes: "E:/projects/BullBot_backup/data/polygon/processed/spikes"
+
+  # Final processed data (ML & Deep Learning)
+  processed_ml: "E:/projects/BullBot_backup/data/processed_ml"
+  processed_deep_learning: "E:/projects/BullBot_backup/data/processed_deep_learning"
+
+# ---------------
+# PREPROCESSING PIPELINE
+# ---------------
+preprocessing:
+  raw_columns: ["ticker", "volume", "open", "close", "high", "low", "window_start", "transactions"]
+
+  metrics_columns: [
+    "ticker", "volume", "open", "close", "high", "low", "window_start", "transactions",
+    "price_range", "price_spread", "midpoint_price", "average_price", "avg_trade_size",
+    "typical_price", "VWAP", "RSI", "MACD", "Signal_Line",
+    "Bollinger_Upper", "Bollinger_Lower"
+  ]
+
+  save_format: "npy"  # Options: "npy" (for DL) or "csv" (for ML)
+
+  # Newly Added Section: Define training/validation/test split
+  deep_learning_files:
+    train_data: "E:/projects/BullBot_backup/data/processed_deep_learning/train.npy"
+    val_data: "E:/projects/BullBot_backup/data/processed_deep_learning/val.npy"
+    test_data: "E:/projects/BullBot_backup/data/processed_deep_learning/test.npy"
+
+# ---------------
+# TRAINING CONFIG (Traditional ML)
+# ---------------
+ml_training:
+  model_type: "XGBoost"  # Options: "XGBoost", "RandomForest", "SVM"
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 50
+  model_save_path: "E:/projects/BullBot_backup/models/ml_model.pkl"
+
+# ---------------
+# TRAINING CONFIG (Deep Learning)
+# ---------------
+dl_training:
+  model_type: "Transformer"  # Options: "Transformer", "LSTM", "CNN"
+  batch_size: 32
+  learning_rate: 0.0001
+  num_epochs: 20
+  model_save_path: "E:/projects/BullBot_backup/models/deep_learning_model.pth"
+
+# ---------------
+# SCRIPT PATHS
+# ---------------
+script_paths:
+  fetch_polygon: "E:/projects/BullBot_backup/src/preprocessing/fetch_polygon.py"
+  clean_polygon: "E:/projects/BullBot_backup/src/preprocessing/clean_polygon.py"
+  metrics_polygon: "E:/projects/BullBot_backup/src/preprocessing/metrics_polygon.py"
+  continuous_polygon: "E:/projects/BullBot_backup/src/preprocessing/continuous_polygon.py"
+  spikes_polygon: "E:/projects/BullBot_backup/src/preprocessing/spikes_polygon.py"
+  preprocess_ml: "E:/projects/BullBot_backup/src/supervised_learning/preprocess.py"
+  preprocess_dl: "E:/projects/BullBot_backup/src/deep_learning/preprocess.py"
+  train_ml: "E:/projects/BullBot_backup/src/supervised_learning/train.py"
+  train_dl: "E:/projects/BullBot_backup/src/deep_learning/train.py"
+  predict_dl: "E:/projects/BullBot_backup/src/deep_learning/predict.py"
+  run_pipeline: "E:/projects/BullBot_backup/run_pipeline.py"  # Newly added for easy execution
