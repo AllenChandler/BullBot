@@ -33,6 +33,9 @@ The goal is to create high-quality datasets for training, validation, and testin
 
 ---
 
+## Overview
+BullBot is a full-stack ML system for short-term stock spike prediction. The complete system includes a trained RandomForestClassifier with spike/non-spike classification, technical indicator feature engineering (VWAP, RSI, MACD, Bollinger Bands), a rolling-window live simulation pipeline, and a full train/validation/test evaluation framework with classification reports and confusion matrix outputs. The data processing pipeline in this repo feeds the training and inference infrastructure. A deep learning extension incorporating LSTM and TCN architectures is currently in development.
+
 ## Features
 
 - **Automated Data Fetching**:
