@@ -1,4 +1,4 @@
-# BullBot Data Processing Pipeline
+# BullBot
 
 ## Overview
 
@@ -6,43 +6,39 @@ BullBot is a full-stack ML system for short-term stock spike prediction. The com
 
 The **BullBot Data Processing Pipeline** is designed to streamline the preprocessing, analysis, and preparation of stock market data for machine learning models. This repository provides tools to fetch, clean, calculate metrics, and identify pre-spike and non-spike data patterns across multiple ticker symbols and timelines. The goal is to create high-quality datasets for training, validation, and testing stock market prediction models.
 
-
 ### Table of Contents
 
-1. [Overview](#overview)  
-2. [Features](#features)  
-3. [Directory Structure](#directory-structure)  
-4. [Installation](#installation)  
-   - [Prerequisites](#prerequisites)  
-   - [Setup](#setup)  
-5. [Usage](#usage)  
-   - [Fetch Data](#fetch-data)  
-   - [Clean Data](#clean-data)  
-   - [Calculate Metrics](#calculate-metrics)  
-   - [Detect Spikes](#detect-spikes)  
-   - [Detect Non-Spikes](#detect-non-spikes)  
-   - [Combine Tickers](#combine-tickers)  
-6. [Example Workflow](#example-workflow)  
-7. [Configuration](#configuration)  
-8. [Next Steps](#next-steps)  
-   - [Model Training](#1-model-training)  
-   - [Validation & Testing](#2-validation--testing)  
-   - [Real-Time Prediction](#3-real-time-prediction)  
-9. [Issues & Resolutions](#issues--resolutions)  
-10. [License](#license)  
-11. [Contribution](#contribution)  
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Directory Structure](#directory-structure)
+4. [Installation](#installation)
+   - [Prerequisites](#prerequisites)
+   - [Setup](#setup)
+5. [Usage](#usage)
+   - [Fetch Data](#fetch-data)
+   - [Clean Data](#clean-data)
+   - [Calculate Metrics](#calculate-metrics)
+   - [Detect Spikes](#detect-spikes)
+   - [Detect Non-Spikes](#detect-non-spikes)
+   - [Combine Tickers](#combine-tickers)
+6. [Example Workflow](#example-workflow)
+7. [Configuration](#configuration)
+8. [Next Steps](#next-steps)
+   - [Model Training](#1-model-training)
+   - [Validation & Testing](#2-validation--testing)
+   - [Real-Time Prediction](#3-real-time-prediction)
+9. [Issues & Resolutions](#issues--resolutions)
+10. [License](#license)
+11. [Contribution](#contribution)
 
 ---
-
-## Overview
-
 
 ## Features
 
 - **Automated Data Fetching**:
   - Downloads minute-by-minute stock market data from an S3 bucket.
   - Supports decompression of `.gz` files into `.csv` format.
-  
+
 - **Comprehensive Data Cleaning**:
   - Handles missing values, invalid timestamps, and non-numeric data.
   - Validates and filters essential columns like `close` and `window_start`.
@@ -62,6 +58,7 @@ The **BullBot Data Processing Pipeline** is designed to streamline the preproces
 
 ## Directory Structure
 
+```
 E:/projects/BullBot/
 │
 ├── config/
@@ -131,11 +128,10 @@ E:/projects/BullBot/
 ├── tests/
 │   ├── test_data_loader.py
 │   ├── test_data_preprocessing.py
-│   ├── test_feature_engineering.py
-│   └── __init__.py
+│   └── test_feature_engineering.py
 │
 └── README.md
-
+```
 
 ---
 
@@ -150,7 +146,7 @@ E:/projects/BullBot/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/BullBot.git
+   git clone https://github.com/AllenChandler/BullBot.git
    cd BullBot
    ```
 
@@ -158,7 +154,7 @@ E:/projects/BullBot/
    ```bash
    python -m venv BullBot_env
    source BullBot_env/bin/activate  # Linux/Mac
-   BullBot_env\Scripts\activate    # Windows
+   BullBot_env\Scripts\activate     # Windows
    ```
 
 3. **Install dependencies**:
@@ -174,37 +170,31 @@ E:/projects/BullBot/
 ## Usage
 
 ### Fetch Data
-Fetch stock market data from S3 and decompress it:
 ```bash
 python src/fetch_data.py
 ```
 
 ### Clean Data
-Clean and validate the raw data:
 ```bash
 python src/clean_polygon.py
 ```
 
 ### Calculate Metrics
-Generate advanced technical metrics:
 ```bash
 python src/metrics_polygon.py
 ```
 
 ### Detect Spikes
-Identify pre-spike patterns:
 ```bash
 python src/spikes_polygon.py
 ```
 
 ### Detect Non-Spikes
-Identify non-spike patterns:
 ```bash
 python src/non_spikes_polygon.py
 ```
 
 ### Combine Tickers
-Create continuous timelines for each ticker:
 ```bash
 python src/combine_tickers.py
 ```
@@ -243,9 +233,8 @@ python src/combine_tickers.py
 ## Configuration
 
 - Adjust parameters in the individual scripts:
-  - `spike_threshold` (default: `0.30`) in `spikes_polygon.py`.
-  - `spike_window_minutes` (default: `120`) in `spikes_polygon.py` and `non_spikes_polygon.py`.
-
+  - `spike_threshold` (default: `0.30`) in `spikes_polygon.py`
+  - `spike_window_minutes` (default: `120`) in `spikes_polygon.py` and `non_spikes_polygon.py`
 - Update file paths in `src/` scripts if needed.
 
 ---
@@ -253,15 +242,16 @@ python src/combine_tickers.py
 ## Next Steps
 
 ### 1. Model Training
-- Prepare the training pipeline to use pre-spike and non-spike datasets.
-- Incorporate machine learning frameworks like TensorFlow or PyTorch.
+- Training pipeline using pre-spike and non-spike datasets is implemented in `src/training/spike_train_polygon.py`.
+- Deep learning extension with LSTM and TCN architectures in development.
 
 ### 2. Validation & Testing
-- Use continuous ticker timelines for robust validation.
-- Test the model on unseen data.
+- Validation pipeline: `src/validation/spike_val_polygon.py`
+- Test pipeline: `src/testing/spike_test_polygon.py`
 
 ### 3. Real-Time Prediction
-- Connect the trained model to live API feeds for real-time spike predictions.
+- Live simulation pipeline: `src/testing/short_spike_live_test.py`
+- Connect trained model to live API feeds for real-time spike prediction.
 
 ---
 
@@ -286,16 +276,9 @@ python src/combine_tickers.py
 
 ## Contribution
 
-We welcome contributions to the BullBot Data Processing Pipeline! Whether it's reporting issues, suggesting features, or submitting pull requests, your input is valuable.
+Contributions welcome. Report bugs or suggest features via GitHub Issues, or submit a pull request.
 
-How to Contribute
-Report Bugs: Use the GitHub Issues page to report bugs or feature requests.
-Fork and Submit PRs: Fork the repository, make your changes, and submit a pull request for review.
-Suggest Enhancements: Contact us directly with your ideas or feedback.
-Contact Information
-GitHub: @AllenChandler
-X: @WonMoreWave
-LinkedIn: https://www.linkedin.com/in/allenjchandler
-Email: allenjchandler@gmail.com
-       allen@shiftedorigin.com
-Feel free to reach out with any questions or suggestions. Thank you for helping make BullBot even better!
+**Contact:**
+- GitHub: [@AllenChandler](https://github.com/AllenChandler)
+- LinkedIn: [in/allenjchandler](https://www.linkedin.com/in/allenjchandler)
+- Email: allenjchandler@gmail.com
