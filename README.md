@@ -2,9 +2,10 @@
 
 ## Overview
 
-The **BullBot Data Processing Pipeline** is designed to streamline the preprocessing, analysis, and preparation of stock market data for machine learning models. This repository provides tools to fetch, clean, calculate metrics, and identify pre-spike and non-spike data patterns across multiple ticker symbols and timelines.
+BullBot is a full-stack ML system for short-term stock spike prediction. The complete system includes a trained RandomForestClassifier with spike/non-spike classification, technical indicator feature engineering (VWAP, RSI, MACD, Bollinger Bands), a rolling-window live simulation pipeline, and a full train/validation/test evaluation framework with classification reports and confusion matrix outputs. The data processing pipeline in this repo feeds the training and inference infrastructure. A deep learning extension incorporating LSTM and TCN architectures is currently in development.
 
-The goal is to create high-quality datasets for training, validation, and testing stock market prediction models.
+The **BullBot Data Processing Pipeline** is designed to streamline the preprocessing, analysis, and preparation of stock market data for machine learning models. This repository provides tools to fetch, clean, calculate metrics, and identify pre-spike and non-spike data patterns across multiple ticker symbols and timelines. The goal is to create high-quality datasets for training, validation, and testing stock market prediction models.
+
 
 ### Table of Contents
 
@@ -34,7 +35,7 @@ The goal is to create high-quality datasets for training, validation, and testin
 ---
 
 ## Overview
-BullBot is a full-stack ML system for short-term stock spike prediction. The complete system includes a trained RandomForestClassifier with spike/non-spike classification, technical indicator feature engineering (VWAP, RSI, MACD, Bollinger Bands), a rolling-window live simulation pipeline, and a full train/validation/test evaluation framework with classification reports and confusion matrix outputs. The data processing pipeline in this repo feeds the training and inference infrastructure. A deep learning extension incorporating LSTM and TCN architectures is currently in development.
+
 
 ## Features
 
